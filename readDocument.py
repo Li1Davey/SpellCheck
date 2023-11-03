@@ -10,21 +10,37 @@ from nltk import word_tokenize
 from nltk.util import ngrams
 from extractData import*
 
+def getWordUnigrams(paragraphs):
+    unigrams = []
+    for para in paragraphs:
+        token = word_tokenize(para)
+        u = list(ngrams(token, 1))
+        unigrams.append(u)
+
+    unigrams = list(filter(None, unigrams))
+    return unigrams
+
+def getWordBigrams(paragraphs):
+    bigrams = []
+    for para in paragraphs:
+        token = word_tokenize(para)
+        b = list(ngrams(token, 2))
+        bigrams.append(b)
+
+    bigrams = list(filter(None, bigrams))
+    return bigrams
+
 #_Main---------------------------------------------------
 input = Document('SmallErrorSample.docx')
 paragraphs = []
-bigrams = []
+
 for para in input.paragraphs:
     p = para.text
     paragraphs.append(p)
 
-for para in paragraphs:
-    token = word_tokenize(para)
-    b = list(ngrams(token, 2))
-    bigrams.append(b)
-
-bigrams.remove([])
-#print(bigrams)
+unigrams = getWordUnigrams(paragraphs)
+bigrams = getWordBigrams(paragraphs)
+#print(unigrams)
 
 output = Document()
 for item in paragraphs:
