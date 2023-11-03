@@ -8,6 +8,7 @@ https://stackoverflow.com/questions/21844546/forming-bigrams-of-words-in-list-of
 from docx import Document
 from nltk import word_tokenize 
 from nltk.util import ngrams
+from extractData import*
 
 #_Main---------------------------------------------------
 input = Document('SmallErrorSample.docx')
