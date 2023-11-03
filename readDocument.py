@@ -11,7 +11,7 @@ for para in input.paragraphs:
     p = para.text
     paragraphs.append(p)
 
-print(paragraphs)
+#print(paragraphs)
 output = Document()
 for item in paragraphs:
     output.add_paragraph(item)
