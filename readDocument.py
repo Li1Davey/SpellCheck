@@ -5,7 +5,7 @@ https://stackoverflow.com/questions/48869423/how-do-i-copy-the-contents-of-a-wor
 from docx import Document
 
 #_Main---------------------------------------------------
-input = Document('Source.docx')
+input = Document('SmallErrorSample.docx')
 paragraphs = []
 for para in input.paragraphs:
     p = para.text
@@ -15,4 +15,4 @@ for para in input.paragraphs:
 output = Document()
 for item in paragraphs:
     output.add_paragraph(item)
-output.save('New.docx')
+output.save('Output.docx')
