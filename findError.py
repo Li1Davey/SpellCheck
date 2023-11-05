@@ -18,7 +18,7 @@ def checkWord():
     unigramDict, total = getDictionaryUnigrams()
     documentUnigrams = getWordUnigrams(paragraphs)
     errorList = []
-    print(documentUnigrams)
+    # print(documentUnigrams)
 
     for innerlist in documentUnigrams:
         for i in range(len(innerlist)):
@@ -26,9 +26,9 @@ def checkWord():
             if(unigramDict.get(word) == None):
                 errorList.append(i)
 
-    print(errorList)
+    # print(errorList)
 
 ###-------main----------
 
-print(checkWord())
+# print(checkWord())
 
