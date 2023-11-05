@@ -8,15 +8,9 @@ from docx import Document
 
 def checkWord():
 
-    input = Document('SmallErrorSample.docx')
-    paragraphs = []
-
-    for para in input.paragraphs:
-        p = para.text
-        paragraphs.append(p)
-
+    file = 'SmallErrorSample.docx'
     unigramDict, total = getDictionaryUnigrams()
-    documentUnigrams = getWordUnigrams(paragraphs)
+    documentUnigrams = getWordUnigrams(file)
     errorList = []
     # print(documentUnigrams)
 
@@ -25,10 +19,10 @@ def checkWord():
             word = innerlist[i]
             if(unigramDict.get(word) == None):
                 errorList.append(i)
-
-    # print(errorList)
+                
+    print(errorList)
 
 ###-------main----------
 
-# print(checkWord())
+print(checkWord())
 

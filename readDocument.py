@@ -10,12 +10,20 @@ from nltk import word_tokenize
 from nltk.util import ngrams
 from extractData import*
 
-def getWordUnigrams(paragraphs):
+def getWordUnigrams(document:str):
+
+    file = document
+    input = Document(file)
+    paragraphs = []
+
+    for para in input.paragraphs:
+        p = para.text
+        paragraphs.append(p)
+
     unigrams = []
     for para in paragraphs:
         token = word_tokenize(para)
-        u = list(ngrams(token, 1))
-        unigrams.append(u)
+        unigrams.append(token)
 
     unigrams = list(filter(None, unigrams))
     return unigrams
@@ -32,13 +40,14 @@ def getWordBigrams(paragraphs):
 
 #_Main---------------------------------------------------
 input = Document('SmallErrorSample.docx')
+file = 'SmallErrorSample.docx'
 paragraphs = []
 
 for para in input.paragraphs:
     p = para.text
     paragraphs.append(p)
 
-unigrams = getWordUnigrams(paragraphs)
+unigrams = getWordUnigrams(file)
 bigrams = getWordBigrams(paragraphs)
 #print(unigrams)
 
