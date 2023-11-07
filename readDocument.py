@@ -11,7 +11,6 @@ from nltk.util import ngrams
 from extractData import*
 
 def getWordUnigrams(document:str):
-
     file = document
     input = Document(file)
     paragraphs = []
@@ -28,7 +27,15 @@ def getWordUnigrams(document:str):
     unigrams = list(filter(None, unigrams))
     return unigrams
 
-def getWordBigrams(paragraphs):
+def getWordBigrams(document:str):
+    file = document
+    input = Document(file)
+    paragraphs = []
+
+    for para in input.paragraphs:
+        p = para.text
+        paragraphs.append(p)
+    
     bigrams = []
     for para in paragraphs:
         token = word_tokenize(para)
@@ -39,6 +46,7 @@ def getWordBigrams(paragraphs):
     return bigrams
 
 #_Main---------------------------------------------------
+'''
 input = Document('SmallErrorSample.docx')
 file = 'SmallErrorSample.docx'
 paragraphs = []
@@ -55,3 +63,4 @@ output = Document()
 for item in paragraphs:
     output.add_paragraph(item)
 output.save('Output.docx')
+'''
