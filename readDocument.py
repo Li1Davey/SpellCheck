@@ -1,4 +1,6 @@
 '''
+Program by Cristian Pedroza & David Sanchez
+
 code for reading and creating a copy of a document from
 https://stackoverflow.com/questions/48869423/how-do-i-copy-the-contents-of-a-word-document
 
@@ -44,23 +46,3 @@ def getWordBigrams(document:str):
 
     bigrams = list(filter(None, bigrams))
     return bigrams
-
-#_Main---------------------------------------------------
-'''
-input = Document('SmallErrorSample.docx')
-file = 'SmallErrorSample.docx'
-paragraphs = []
-
-for para in input.paragraphs:
-    p = para.text
-    paragraphs.append(p)
-
-unigrams = getWordUnigrams(file)
-bigrams = getWordBigrams(paragraphs)
-#print(unigrams)
-
-output = Document()
-for item in paragraphs:
-    output.add_paragraph(item)
-output.save('Output.docx')
-'''
