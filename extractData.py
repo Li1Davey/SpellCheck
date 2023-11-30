@@ -1,36 +1,27 @@
 '''
 Program by Cristian Pedroza & David Sanchez
 '''
+# Function to load the 1-gram file and create a dictionary of valid words with frequencies
+def load_1gram(file_path, num_words=50000):
+    valid_words = {}
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for i, line in enumerate(file):
+            parts = line.strip().split('\t')
+            word, frequency = parts[1], int(parts[0])  # Use index 1 for the word and index 0 for frequency
+            if word.isalpha():
+                valid_words[word.lower()] = frequency
+            if i >= num_words:
+                break
+    return valid_words
 
-def getDictionaryBigrams():
-    dict_bigrams = []
-    #i = 0
-    with open("new_wp_2gram.txt", encoding="utf8") as file:
-        for line in file:
-            x = line.replace('\n', '')
-            a = x.split('\t')
-            a[0] = int(a[0])
-            dict_bigrams.append(a)
-            '''
-            #Used to keep track of how many lines are already extracted
-            if (i % 10000000 == 0):
-                print(i)
-            i+=1
-            '''
-    #print("Bigram Dictionary Results (First 10 lines)")
-    #print(dict_bigrams[:10])
-    return dict_bigrams
-
-def getDictionaryUnigrams():
-    file = 'wp_1gram.txt'
-    fp = open(file, encoding="utf8")
-    dict_unigrams = {}
-    for line in fp.readlines():
-        x = line.replace('\n', '') 
-        a = x.split('\t')
-        count = int(a[0])
-        word = a[1]
-        dict_unigrams[word] = count/1548800152
-    #print("Unigram Dictionary Results (First 10 lines)")
-    #print(dict(list(dict_unigrams.items())[0: 10]))
-    return dict_unigrams
+# Function to load the 2-gram file and create a dictionary of valid 2-grams with frequencies
+def load_2gram(file_path, num_ngrams=10000000):
+    valid_2grams = {}
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for i, line in enumerate(file):
+            parts = line.strip().split('\t')
+            ngram, frequency = tuple(parts[-2:]), int(parts[0])  # Use index -2 for the 2-gram and index 0 for frequency
+            valid_2grams[ngram] = frequency
+            if i >= num_ngrams:
+                break
+    return valid_2grams
