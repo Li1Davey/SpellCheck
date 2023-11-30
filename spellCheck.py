@@ -1,3 +1,7 @@
+'''
+Program by Cristian Pedroza & David Sanchez
+
+'''
 from extractData import*
 from correctError import*
 from readDocument import*
