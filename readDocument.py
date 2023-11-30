@@ -4,45 +4,23 @@ Program by Cristian Pedroza & David Sanchez
 code for reading and creating a copy of a document from
 https://stackoverflow.com/questions/48869423/how-do-i-copy-the-contents-of-a-word-document
 
-code for getting word bigrams from text from
-https://stackoverflow.com/questions/21844546/forming-bigrams-of-words-in-list-of-sentences-with-python
 '''
-from docx import Document
-from nltk import word_tokenize 
-from nltk.util import ngrams
-from extractData import*
+import docx
 
-def getWordUnigrams(document:str):
-    file = document
-    input = Document(file)
-    paragraphs = []
+# Function to read a Word document and extract text
+def read_word_document(file_path):
+    doc = docx.Document(file_path)
+    full_text = []
+    for paragraph in doc.paragraphs:
+        full_text.append(paragraph.text)
+    return '\n'.join(full_text)
 
-    for para in input.paragraphs:
-        p = para.text
-        paragraphs.append(p)
-
-    unigrams = []
-    for para in paragraphs:
-        token = word_tokenize(para)
-        unigrams.append(token)
-
-    unigrams = list(filter(None, unigrams))
-    return unigrams
-
-def getWordBigrams(document:str):
-    file = document
-    input = Document(file)
-    paragraphs = []
-
-    for para in input.paragraphs:
-        p = para.text
-        paragraphs.append(p)
+# Function to write the corrected text to a new Word document
+def write_corrected_text_to_docx(corrected_text, output_path='corrected_document.docx'):
+    doc = docx.Document()
+    paragraphs = corrected_text.split('\n')
     
-    bigrams = []
-    for para in paragraphs:
-        token = word_tokenize(para)
-        b = list(ngrams(token, 2))
-        bigrams.append(b)
-
-    bigrams = list(filter(None, bigrams))
-    return bigrams
+    for paragraph_text in paragraphs:
+        doc.add_paragraph(paragraph_text)
+    
+    doc.save(output_path)
