@@ -1,4 +1,6 @@
-
+'''
+Program by Cristian Pedroza & David Sanchez
+'''
 import re
 
 def is_valid_ngram(ngram):
