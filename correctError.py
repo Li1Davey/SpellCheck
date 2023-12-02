@@ -1,7 +1,3 @@
-'''
-Program by Cristian Pedroza & David Sanchez
-
-'''
 import string
 from nltk.tokenize import word_tokenize
 from nltk.metrics import edit_distance
@@ -24,21 +20,18 @@ def replace_misspelled_words(document_text, misspelled_words, valid_words, valid
             # Use a simple bigram model to improve replacement based on context and frequencies
             if i > 0:
                 prev_word = words[i - 1].lower()
-                bigram = (prev_word, closest_match)
+                bigram = (prev_word, word)
                 if bigram in valid_2grams:
                     freq_bigram = valid_2grams[bigram]
                     freq_closest_match = valid_words[closest_match]
                     if freq_bigram > freq_closest_match:
-                        corrected_text.append(closest_match)
+                        corrected_text.append(word)
                     else:
-                        corrected_text.append(bigram[1])
+                        corrected_text.append(closest_match)
                 else:
                     corrected_text.append(closest_match)
             else:
                 corrected_text.append(closest_match)
-
-            # Print misspelled words
-            #print(f"Misspelled word: {word}, Corrected word: {closest_match}")
         else:
             corrected_text.append(word)
 
